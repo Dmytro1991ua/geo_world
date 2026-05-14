@@ -1,0 +1,30 @@
+import withNuxt from './.nuxt/eslint.config.mjs';
+import unusedImports from 'eslint-plugin-unused-imports';
+
+export default withNuxt({
+  plugins: {
+    'unused-imports': unusedImports,
+  },
+
+  rules: {
+    'no-console': 'warn',
+    'no-debugger': 'warn',
+    'no-duplicate-imports': 'error',
+    'unused-imports/no-unused-imports': 'warn',
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_',
+      },
+    ],
+    'no-unused-vars': 'off',
+    '@typescript-eslint/no-unused-vars': ['warn'],
+    'vue/multi-word-component-names': 'off',
+    'prefer-const': 'warn',
+    'no-var': 'error',
+    eqeqeq: ['warn', 'always'],
+  },
+});
