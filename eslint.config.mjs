@@ -1,11 +1,12 @@
 import withNuxt from './.nuxt/eslint.config.mjs';
 import unusedImports from 'eslint-plugin-unused-imports';
+import stylistic from '@stylistic/eslint-plugin';
 
 export default withNuxt({
   plugins: {
     'unused-imports': unusedImports,
+    '@stylistic': stylistic,
   },
-
   rules: {
     'no-console': 'warn',
     'no-debugger': 'warn',
@@ -26,5 +27,8 @@ export default withNuxt({
     'prefer-const': 'warn',
     'no-var': 'error',
     eqeqeq: ['warn', 'always'],
+    '@stylistic/quotes': ['error', 'single'],
+    '@stylistic/indent': ['error', 2],
+    '@stylistic/comma-dangle': ['error', 'always-multiline'],
   },
 });
