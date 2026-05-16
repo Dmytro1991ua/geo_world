@@ -56,6 +56,7 @@ export default withNuxt(
         { blankLine: 'any', prev: 'import', next: 'import' },
       ],
       '@stylistic/no-multiple-empty-lines': ['error', { max: 1, maxBOF: 0, maxEOF: 0 }],
+      '@stylistic/eol-last': ['error', 'always'],
     },
   },
   {
