@@ -1,34 +1,71 @@
-import withNuxt from './.nuxt/eslint.config.mjs';
-import unusedImports from 'eslint-plugin-unused-imports';
 import stylistic from '@stylistic/eslint-plugin';
+import noRelativeImportPaths from 'eslint-plugin-no-relative-import-paths';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
+import unusedImports from 'eslint-plugin-unused-imports';
 
-export default withNuxt({
-  plugins: {
-    'unused-imports': unusedImports,
-    '@stylistic': stylistic,
+import withNuxt from './.nuxt/eslint.config.mjs';
+
+export default withNuxt(
+  {
+    ignores: ['.nuxt/**', '.output/**', 'node_modules/**', 'dist/**'],
   },
-  rules: {
-    'no-console': 'warn',
-    'no-debugger': 'warn',
-    'no-duplicate-imports': 'error',
-    'unused-imports/no-unused-imports': 'warn',
-    'unused-imports/no-unused-vars': [
-      'warn',
-      {
-        vars: 'all',
-        varsIgnorePattern: '^_',
-        args: 'after-used',
-        argsIgnorePattern: '^_',
-      },
-    ],
-    'no-unused-vars': 'off',
-    '@typescript-eslint/no-unused-vars': ['warn'],
-    'vue/multi-word-component-names': 'off',
-    'prefer-const': 'warn',
-    'no-var': 'error',
-    eqeqeq: ['warn', 'always'],
-    '@stylistic/quotes': ['error', 'single'],
-    '@stylistic/indent': ['error', 2],
-    '@stylistic/comma-dangle': ['error', 'always-multiline'],
+  {
+    plugins: {
+      'simple-import-sort': simpleImportSort,
+      'unused-imports': unusedImports,
+      '@stylistic': stylistic,
+      'no-relative-import-paths': noRelativeImportPaths,
+    },
+    rules: {
+      'no-console': 'warn',
+      'no-debugger': 'warn',
+      'no-duplicate-imports': 'error',
+      'no-unused-vars': 'off',
+      'no-var': 'error',
+      'prefer-const': 'warn',
+      eqeqeq: ['warn', 'always'],
+
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
+
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': [
+        'warn',
+        {
+          vars: 'all',
+          varsIgnorePattern: '^_',
+          args: 'after-used',
+          argsIgnorePattern: '^_',
+        },
+      ],
+
+      'no-relative-import-paths/no-relative-import-paths': [
+        'warn',
+        { allowSameFolder: true, rootDir: '.', prefix: '~' },
+      ],
+
+      '@typescript-eslint/no-unused-vars': 'off',
+      'vue/multi-word-component-names': 'off',
+
+      '@stylistic/quotes': ['error', 'single'],
+      '@stylistic/indent': ['error', 2],
+      '@stylistic/comma-dangle': ['error', 'always-multiline'],
+      '@stylistic/padding-line-between-statements': [
+        'error',
+        { blankLine: 'always', prev: 'import', next: '*' },
+        { blankLine: 'any', prev: 'import', next: 'import' },
+      ],
+      '@stylistic/no-multiple-empty-lines': ['error', { max: 1, maxBOF: 0, maxEOF: 0 }],
+      '@stylistic/eol-last': ['error', 'always'],
+    },
   },
-});
+  {
+    files: ['server/**/*.ts', 'layers/**/server/**/*.ts'],
+    rules: {
+      'no-relative-import-paths/no-relative-import-paths': [
+        'warn',
+        { allowSameFolder: true, rootDir: '.', prefix: '#shared' },
+      ],
+    },
+  },
+);
