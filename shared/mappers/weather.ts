@@ -9,18 +9,18 @@ import type {
   WeatherHourlyDTO,
   WeatherHourlyUI,
   WeatherUI,
-} from '#shared/types/weather'
+} from '#shared/types/weather';
 import {
   buildWeatherIconUrl,
   formatUnixToDate,
   formatUnixToDateTime,
   formatUnixToTime,
-} from '#shared/utils/formatters/weather'
+} from '#shared/utils/formatters/weather';
 
 const mapCondition = (weather: WeatherCurrentDTO['weather'][0] | undefined) => ({
   description: weather?.description ?? '',
   iconUrl: weather ? buildWeatherIconUrl(weather.icon) : '',
-})
+});
 
 const mapCurrentToUI = (current: WeatherCurrentDTO, offset: number): WeatherCurrentUI => ({
   temperature: Math.round(current.temp),
@@ -40,7 +40,7 @@ const mapCurrentToUI = (current: WeatherCurrentDTO, offset: number): WeatherCurr
   condition: mapCondition(current.weather[0]),
   rain: current.rain?.['1h'] ?? null,
   snow: current.snow?.['1h'] ?? null,
-})
+});
 
 const mapHourlyToUI = (hourly: WeatherHourlyDTO, offset: number): WeatherHourlyUI => ({
   time: formatUnixToTime(hourly.dt, offset),
@@ -49,7 +49,7 @@ const mapHourlyToUI = (hourly: WeatherHourlyDTO, offset: number): WeatherHourlyU
   windSpeed: hourly.wind_speed,
   precipitationChance: Math.round(hourly.pop * 100),
   condition: mapCondition(hourly.weather[0]),
-})
+});
 
 const mapDailyToUI = (daily: WeatherDailyDTO, offset: number): WeatherDailyUI => ({
   date: formatUnixToDate(daily.dt, offset),
@@ -65,7 +65,7 @@ const mapDailyToUI = (daily: WeatherDailyDTO, offset: number): WeatherDailyUI =>
   precipitationChance: Math.round(daily.pop * 100),
   uvIndex: daily.uvi,
   condition: mapCondition(daily.weather[0]),
-})
+});
 
 const mapAlertToUI = (alert: WeatherAlertDTO, offset: number): WeatherAlertUI => ({
   source: alert.sender_name,
@@ -73,10 +73,10 @@ const mapAlertToUI = (alert: WeatherAlertDTO, offset: number): WeatherAlertUI =>
   from: formatUnixToDateTime(alert.start, offset),
   to: formatUnixToDateTime(alert.end, offset),
   description: alert.description,
-})
+});
 
 export const mapWeatherDtoToUI = (weather: WeatherDTO): WeatherUI => {
-  const offset = weather.timezone_offset
+  const offset = weather.timezone_offset;
 
   return {
     timezone: weather.timezone,
@@ -84,5 +84,5 @@ export const mapWeatherDtoToUI = (weather: WeatherDTO): WeatherUI => {
     hourly: weather.hourly.map(hour => mapHourlyToUI(hour, offset)),
     daily: weather.daily.map(day => mapDailyToUI(day, offset)),
     alerts: weather.alerts?.map(alert => mapAlertToUI(alert, offset)) ?? [],
-  }
-}
+  };
+};

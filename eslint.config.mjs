@@ -6,9 +6,12 @@ import unusedImports from 'eslint-plugin-unused-imports';
 import withNuxt from './.nuxt/eslint.config.mjs';
 
 export default withNuxt(
+  // 1. Core Global Ignores Configuration Block
   {
-    ignores: ['.nuxt/**', '.output/**', 'node_modules/**', 'dist/**'],
+    ignores: ['**/.nuxt/**', '**/.output/**', '**/node_modules/**', '**/dist/**'],
   },
+
+  // 2. Main Workspace Plugin Map and Rule Definitions
   {
     plugins: {
       'simple-import-sort': simpleImportSort,
@@ -57,8 +60,12 @@ export default withNuxt(
       ],
       '@stylistic/no-multiple-empty-lines': ['error', { max: 1, maxBOF: 0, maxEOF: 0 }],
       '@stylistic/eol-last': ['error', 'always'],
+      '@stylistic/semi': ['error', 'always'],
+      '@stylistic/no-trailing-spaces': 'error',
     },
   },
+
+  // 3. Layer Specific Absolute Import Overrides
   {
     files: ['server/**/*.ts', 'layers/**/server/**/*.ts'],
     rules: {

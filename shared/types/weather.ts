@@ -3,7 +3,7 @@ export type WeatherConditionDTO = {
   main: string;
   description: string;
   icon: string;
-}
+};
 
 export type WeatherCurrentDTO = {
   dt: number;
@@ -23,7 +23,7 @@ export type WeatherCurrentDTO = {
   rain?: { '1h': number };
   snow?: { '1h': number };
   weather: WeatherConditionDTO[];
-}
+};
 
 export type WeatherHourlyDTO = {
   dt: number;
@@ -42,7 +42,7 @@ export type WeatherHourlyDTO = {
   rain?: { '1h': number };
   snow?: { '1h': number };
   weather: WeatherConditionDTO[];
-}
+};
 
 export type WeatherDailyTempDTO = {
   morn: number;
@@ -51,7 +51,7 @@ export type WeatherDailyTempDTO = {
   night: number;
   min: number;
   max: number;
-}
+};
 
 export type WeatherDailyDTO = {
   dt: number;
@@ -75,7 +75,7 @@ export type WeatherDailyDTO = {
   rain?: number;
   snow?: number;
   weather: WeatherConditionDTO[];
-}
+};
 
 export type WeatherAlertDTO = {
   sender_name: string;
@@ -84,7 +84,7 @@ export type WeatherAlertDTO = {
   end: number;
   description: string;
   tags: string[];
-}
+};
 
 export type WeatherDTO = {
   lat: number;
@@ -95,12 +95,12 @@ export type WeatherDTO = {
   hourly: WeatherHourlyDTO[];
   daily: WeatherDailyDTO[];
   alerts?: WeatherAlertDTO[];
-}
+};
 
 export type WeatherConditionUI = {
   description: string;
   iconUrl: string;
-}
+};
 
 export type WeatherCurrentUI = {
   temperature: number;
@@ -120,7 +120,7 @@ export type WeatherCurrentUI = {
   condition: WeatherConditionUI;
   rain: number | null;
   snow: number | null;
-}
+};
 
 export type WeatherHourlyUI = {
   time: string;
@@ -129,7 +129,7 @@ export type WeatherHourlyUI = {
   windSpeed: number;
   precipitationChance: number;
   condition: WeatherConditionUI;
-}
+};
 
 export type WeatherDailyUI = {
   date: string;
@@ -145,7 +145,7 @@ export type WeatherDailyUI = {
   precipitationChance: number;
   uvIndex: number;
   condition: WeatherConditionUI;
-}
+};
 
 export type WeatherAlertUI = {
   source: string;
@@ -153,7 +153,7 @@ export type WeatherAlertUI = {
   from: string;
   to: string;
   description: string;
-}
+};
 
 export type WeatherUI = {
   timezone: string;
@@ -161,4 +161,4 @@ export type WeatherUI = {
   hourly: WeatherHourlyUI[];
   daily: WeatherDailyUI[];
   alerts: WeatherAlertUI[];
-}
+};
