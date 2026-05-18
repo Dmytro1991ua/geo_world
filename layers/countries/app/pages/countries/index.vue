@@ -1,14 +1,14 @@
 <script setup>
-const { success } = useAppToast();
+const { data: countries, status } = useGetCountries();
 
-const handleClick = () => {
-  success('Hello');
-};
+watch(countries, (val) => {
+  console.log('[countries]', val);
+}, { immediate: true });
 </script>
 
 <template>
   <div>
-    <h1>Countries page - coming soon</h1>
-    <button @click="handleClick">Click</button>
+    <p v-if="status === 'pending'">Loading...</p>
+    <pre v-else>{{ countries }}</pre>
   </div>
 </template>

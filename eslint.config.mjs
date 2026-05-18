@@ -46,9 +46,19 @@ export default withNuxt(
         'warn',
         { allowSameFolder: true, rootDir: '.', prefix: '~' },
       ],
-
       '@typescript-eslint/no-unused-vars': 'off',
       'vue/multi-word-component-names': 'off',
+      'vue/html-indent': [
+        'error',
+        2,
+        {
+          attribute: 1,
+          baseIndent: 1,
+          closeBracket: 0,
+          alignAttributesVertically: true,
+          ignores: [],
+        },
+      ],
 
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/indent': ['error', 2],
