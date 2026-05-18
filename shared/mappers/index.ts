@@ -1,2 +1,2 @@
-export * from './country'
-export * from './weather'
+export * from './country';
+export * from './weather';

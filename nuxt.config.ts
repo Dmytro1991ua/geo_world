@@ -1,3 +1,5 @@
+import  Aura from '@primeuix/themes/aura';
+
 export default defineNuxtConfig({
   extends: ['./layers/countries', './layers/weather'],
   modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@primevue/nuxt-module'],
@@ -22,7 +24,7 @@ export default defineNuxtConfig({
         compilerOptions: {
           noImplicitAny: true,
           noImplicitReturns: true,
-          noUncheckedIndexedAccess: false, 
+          noUncheckedIndexedAccess: false,
           exactOptionalPropertyTypes: true,
           esModuleInterop: true,
           forceConsistentCasingInFileNames: true,
@@ -43,7 +45,7 @@ export default defineNuxtConfig({
         noFallthroughCasesInSwitch: true,
         exactOptionalPropertyTypes: true,
         esModuleInterop: true,
-        forceConsistentCasingInFileNames: true,        noUncheckedIndexedAccess: false, 
+        forceConsistentCasingInFileNames: true,        noUncheckedIndexedAccess: false,
       },
     },
     sharedTsConfig: {
@@ -51,7 +53,7 @@ export default defineNuxtConfig({
         noImplicitAny: true,
         noImplicitReturns: true,
         exactOptionalPropertyTypes: true,
-        forceConsistentCasingInFileNames: true,        noUncheckedIndexedAccess: false, 
+        forceConsistentCasingInFileNames: true,        noUncheckedIndexedAccess: false,
       },
     },
     nodeTsConfig: {
@@ -65,11 +67,17 @@ export default defineNuxtConfig({
   eslint: {
     config: {
       stylistic: false,
+      standalone: true,
     },
   },
   primevue: {
     options: {
-      ripple: true,
+      ripple: true, theme: {
+        preset: Aura,
+        options: {
+          darkModeSelector: false,
+        },
+      },
     },
-  }, 
-})
+  },
+});
