@@ -2,9 +2,25 @@ export const useGetWeatherData = (
   lat: Ref<number | null>,
   lon: Ref<number | null>,
 ): ReturnType<typeof useApiClient<WeatherUI>> => {
-  return useApiClient<WeatherUI>('/api/weather', {
-    query: computed(() => ({ lat: lat.value, lon: lon.value })),
+  const weatherRequest = useApiClient<WeatherUI>('/api/weather', {
+    query: computed(() => ({
+      lat: lat.value,
+      lon: lon.value,
+    })),
     immediate: false,
-    watch: [lat, lon],
+    watch: false,
   });
+
+  watch(
+    // Weather data depends on country details (latitude/longitude), so wait until both coordinates are available before fetching.
+    [lat, lon],
+    ([newLatValue, newLonValue]) => {
+      if (newLatValue === null || newLonValue === null) return;
+
+      weatherRequest.execute();
+    },
+    { immediate: true },
+  );
+
+  return weatherRequest;
 };
