@@ -1,8 +1,8 @@
-import  Aura from '@primeuix/themes/aura';
+import Aura from '@primeuix/themes/aura';
 
 export default defineNuxtConfig({
   extends: ['./layers/countries', './layers/weather'],
-  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@primevue/nuxt-module'],
+  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@primevue/nuxt-module', '@nuxt/icon'],
   devtools: {
     enabled: true,
   },
@@ -34,7 +34,7 @@ export default defineNuxtConfig({
   },
   vite: {
     optimizeDeps: {
-      include: ['@vue/devtools-core', '@vue/devtools-kit'],
+      include: ['@vue/devtools-core', '@vue/devtools-kit', 'clsx', 'tailwind-merge'],
     },
   },
   typescript: {
@@ -45,7 +45,8 @@ export default defineNuxtConfig({
         noFallthroughCasesInSwitch: true,
         exactOptionalPropertyTypes: true,
         esModuleInterop: true,
-        forceConsistentCasingInFileNames: true,        noUncheckedIndexedAccess: false,
+        forceConsistentCasingInFileNames: true,
+        noUncheckedIndexedAccess: false,
       },
     },
     sharedTsConfig: {
@@ -53,7 +54,8 @@ export default defineNuxtConfig({
         noImplicitAny: true,
         noImplicitReturns: true,
         exactOptionalPropertyTypes: true,
-        forceConsistentCasingInFileNames: true,        noUncheckedIndexedAccess: false,
+        forceConsistentCasingInFileNames: true,
+        noUncheckedIndexedAccess: false,
       },
     },
     nodeTsConfig: {
@@ -72,12 +74,34 @@ export default defineNuxtConfig({
   },
   primevue: {
     options: {
-      ripple: true, theme: {
+      ripple: true,
+      theme: {
         preset: Aura,
         options: {
           darkModeSelector: false,
         },
       },
+    },
+  },
+  css: ['./app/assets/css/main.css'],
+  icon: {
+    // Force server-side local rendering (removes client fetching lag)
+    serverBundle: 'local',
+    fallbackToApi: false,
+    clientBundle: {
+      scan: {
+        globInclude: [
+          './app/**/*.{vue,ts,js}',
+          './layers/countries/**/*.{vue,ts,js}',
+          './layers/weather/**/*.{vue,ts,js}',
+        ],
+        globExclude: ['**/.nuxt/**', '**/dist/**', '**/node_modules/**'],
+      },
+    },
+  },
+  router: {
+    options: {
+      scrollBehaviorType: 'smooth',
     },
   },
 });
