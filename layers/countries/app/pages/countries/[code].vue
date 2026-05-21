@@ -3,34 +3,40 @@ const route = useRoute();
 
 const countryCode = computed(() => String(route.params.code));
 
-const {
-  data: country,
-  status: countryStatus,
-  error: countryError,
-} = useGetCountryDetails(countryCode);
-
+const { data: country, status: countryStatus, error: countryError, refresh: refreshCountry } = await useGetCountryDetails(countryCode);
 const lat = computed(() => country.value?.latlng?.lat ?? null);
 const lon = computed(() => country.value?.latlng?.lon ?? null);
 
-const {
-  data: weather,
-  status: weatherStatus,
-  error: weatherError,
-} = useGetWeatherData(lat, lon);
+const { data: weather, status: weatherStatus, error: weatherError, refresh: refreshWeather } = await useGetWeatherData(lat, lon);
 
+const status = computed(() => {
+  if (countryStatus.value === 'pending' || weatherStatus.value === 'pending') {
+    return 'pending';
+  }
+
+  if (countryStatus.value === 'error' || weatherStatus.value === 'error') {
+    return 'error';
+  }
+
+  return 'success';
+});
+const error = computed(() => countryError.value || weatherError.value);
+const isEmpty = computed(() => !country.value);
+
+const onHandleRetry = async () => {
+  await Promise.all([refreshCountry(), refreshWeather()]);
+};
 </script>
 
 <template>
-  <div>
-    <p v-if="countryStatus === 'pending'">Loading country...</p>
-    <p v-else-if="countryError">Could not load country.</p>
-
-    <template v-else-if="country">
-      <pre>{{ country }}</pre>
-
-      <p v-if="weatherStatus === 'pending'">Loading weather...</p>
-      <p v-else-if="weatherError">Could not load weather.</p>
-      <pre v-else>{{ weather }}</pre>
-    </template>
-  </div>
+  <AppDataState
+    :status="status"
+    :error="error"
+    :is-empty="isEmpty"
+    error-title="Failed to load country or weather data"
+    @retry="onHandleRetry"
+  >
+    <pre>{{ country }}</pre>
+    <pre>{{ weather }}</pre>
+  </AppDataState>
 </template>

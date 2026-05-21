@@ -1,30 +1,29 @@
-import type { ApiClientMessages, ApiErrorBody, ApiFetchOptions, ApiFetchUrl }
-  from './types';
+import type { ApiClientMessages, ApiFetchOptions, ApiFetchUrl } from './types';
 
 export const useApiClient = <T>(
   url: ApiFetchUrl<T>,
-  options?: ApiFetchOptions<T>,
+  options: ApiFetchOptions<T> = {},
   messages: ApiClientMessages = {},
 ) => {
   const { error: toastError, success: toastSuccess } = useAppToast();
-  const { successMessage, errorMessage } = messages;
+  const { errorMessage, successMessage } = messages;
 
-  return useFetch<T>(url, {
+  const response = useFetch<T>(url, {
     ...options,
     watch: false,
-    onResponse: ({ response }) => {
-      if (response.ok && successMessage) {
-        toastSuccess(successMessage);
-      }
-    },
-    onResponseError: ({ response }) => {
-      toastError(
-        errorMessage ?? 'Something went wrong',
-        (response._data as ApiErrorBody)?.statusMessage,
-      );
-    },
-    onRequestError: ({ error }) => {
-      toastError('Network error', error.message);
-    },
   });
+
+  watch(response.error, (err) => {
+    if (err && import.meta.client) {
+      toastError(errorMessage ?? 'Something went wrong', err.message);
+    }
+  });
+
+  watch(response.data, (data) => {
+    if (data && import.meta.client && successMessage) {
+      toastSuccess(successMessage);
+    }
+  });
+
+  return response;
 };

@@ -32,7 +32,6 @@ export default {
       },
       fontFamily: {
         sans: ['Inter', 'ui-sans-serif', 'system-ui'],
-        display: ['Plus Jakarta Sans', 'sans-serif'],
       },
     },
   },

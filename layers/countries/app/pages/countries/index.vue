@@ -1,14 +1,20 @@
-<script setup>
-const { data: countries, status } = useGetCountries();
+<script setup lang="ts">
 
-watch(countries, (val) => {
-  console.log('[countries]', val);
-}, { immediate: true });
+const { data: countries, error, status, refresh } = await useGetCountries();
+
+const isEmpty = computed(() => !countries.value?.length);
+
 </script>
 
 <template>
-  <div>
-    <p v-if="status === 'pending'">Loading...</p>
-    <pre v-else>{{ countries }}</pre>
-  </div>
+  <AppDataState
+    :status="status"
+    :error="error"
+    :is-empty="isEmpty"
+    error-title="Failed to load countries"
+    @retry="refresh"
+  >
+    {{ countries }}
+
+  </AppDataState>
 </template>

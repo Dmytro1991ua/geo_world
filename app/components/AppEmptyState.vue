@@ -11,8 +11,13 @@ type AppEmptyStateProps = {
   descriptionClassName?: string
   wrapperClassName?: string
 };
+type AppEmptyStateEmits = {
+  (e: 'action'): void
+};
 
 defineProps<AppEmptyStateProps>();
+
+const emit = defineEmits<AppEmptyStateEmits>();
 </script>
 
 <template>
@@ -41,11 +46,16 @@ defineProps<AppEmptyStateProps>();
     <NuxtLink
       v-if="actionText && actionTo"
       :to="actionTo"
-      :class="cn(
-        'mt-6 rounded-lg bg-brand-500 px-5 py-2.5 text-sm font-medium text-white hover:bg-brand-600 transition-colors'
-      )"
+      class="btn-style"
     >
       {{ actionText }}
     </NuxtLink>
+    <button
+      v-else-if="actionText"
+      class="btn-style"
+      @click="emit('action')"
+    >
+      {{ actionText }}
+    </button>
   </div>
 </template>

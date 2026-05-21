@@ -104,4 +104,7 @@ export default defineNuxtConfig({
       scrollBehaviorType: 'smooth',
     },
   },
+  tailwindcss: {
+    configPath: 'tailwind.config.ts',
+  },
 });

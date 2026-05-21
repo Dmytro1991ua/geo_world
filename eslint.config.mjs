@@ -59,7 +59,6 @@ export default withNuxt(
           ignores: [],
         },
       ],
-
       '@stylistic/quotes': ['error', 'single'],
       '@stylistic/indent': ['error', 2],
       '@stylistic/comma-dangle': ['error', 'always-multiline'],

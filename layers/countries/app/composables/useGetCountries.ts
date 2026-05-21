@@ -3,7 +3,8 @@ export const useGetCountries = (): ReturnType<typeof useApiClient<CountryUI[]>> 
 
   return useApiClient<CountryUI[]>('/api/countries', {
     key: 'countries-list',
-    lazy: true,
     getCachedData: (key) => nuxtApp.payload.data[key] ?? nuxtApp.static.data[key],
+  }, {
+    errorMessage: 'Failed to load countries data',
   });
 };

@@ -4,17 +4,11 @@ const FAVORITES_EMPTY_STATE = {
   title: 'No favorites yet!',
   description: 'Save countries while exploring and they\'ll appear here.',
   actionText: 'Start exploring',
+  actionTo: '/countries',
 };
 </script>
 
 <template>
-  <AppEmptyState
-    :icon="FAVORITES_EMPTY_STATE.icon"
-    :title="FAVORITES_EMPTY_STATE.title"
-    :description="FAVORITES_EMPTY_STATE.description"
-    :action-text="FAVORITES_EMPTY_STATE.actionText"
-    :wrapper-class-name="'min-h-[calc(100vh-64px)]'"
-    action-to="/countries"
-
-  />
+  <section class="flex h-full flex-1 items-center justify-center">    <AppEmptyState v-bind="FAVORITES_EMPTY_STATE" />
+  </section>
 </template>
