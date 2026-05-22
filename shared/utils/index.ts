@@ -10,6 +10,7 @@ export async function fetchFromExternalApi<T>(handler: () => Promise<T>): Promis
   } catch (e) {
     // 1. Handle network/fetch errors from external APIs
     if (e instanceof FetchError) {
+      console.error('[fetchFromExternalApi] FetchError:', e.status, e.message, e.data);
       throw createError({
         statusCode: e.status || 500,
         statusMessage: e.message || 'External API Error',
@@ -18,6 +19,7 @@ export async function fetchFromExternalApi<T>(handler: () => Promise<T>): Promis
 
     // 2. Handle standard code crashes
     if (e instanceof Error) {
+      console.error('[fetchFromExternalApi] Error:', e.message, e.stack);
       throw createError({
         statusCode: 500,
         statusMessage: e.message,
@@ -25,6 +27,7 @@ export async function fetchFromExternalApi<T>(handler: () => Promise<T>): Promis
     }
 
     // 3. Fallback for completely unknown errors
+    console.error('[fetchFromExternalApi] Unknown error:', e);
     throw createError({
       statusCode: 500,
       statusMessage: 'An internal server error occurred.',

@@ -6,6 +6,15 @@ export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
   const baseUrl = config.public.countriesApiBase;
 
+  console.log('[countries/[code]] countriesApiBase:', baseUrl, '| code:', code);
+
+  if (!baseUrl) {
+    throw createError({
+      statusCode: 500,
+      statusMessage: 'Server misconfiguration: NUXT_PUBLIC_COUNTRIES_API_BASE is not set',
+    });
+  }
+
   const countries = await fetchFromExternalApi<CountryDetailDTO[]>(() =>
     $fetch<CountryDetailDTO[]>(`${baseUrl}/alpha/${code}`),
   );
@@ -21,5 +30,5 @@ export default defineEventHandler(async (event) => {
     )
     : [];
 
-  return mapCountryDetailsDtoToUi(country,borderCountries.map(mapCountryBordersDtoToUI));
+  return mapCountryDetailsDtoToUi(country, borderCountries.map(mapCountryBordersDtoToUI));
 });
