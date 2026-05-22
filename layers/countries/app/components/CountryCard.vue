@@ -1,4 +1,3 @@
-<!-- layers/countries/app/components/CountryCard.vue -->
 <script setup lang="ts">
 type CountryCardProps = {
   country: CountryUI;
@@ -11,7 +10,6 @@ defineProps<CountryCardProps>();
   <div
     class="group relative flex flex-col overflow-hidden rounded-2xl border border-dark-800 bg-dark-900 transition-all duration-300 hover:border-dark-700 hover:shadow-xl hover:shadow-black/20 cursor-pointer"
   >
-    <!-- Flag -->
     <div class="relative w-full overflow-hidden rounded-t-2xl bg-dark-800" style="aspect-ratio: 16/9">
       <img
         :src="country.flag ?? ''"
@@ -20,10 +18,7 @@ defineProps<CountryCardProps>();
         loading="lazy"
       >
     </div>
-
-    <!-- Body -->
     <div class="flex flex-1 flex-col gap-3 p-4">
-      <!-- Name + favourite button -->
       <div class="flex items-start justify-between gap-2">
         <div>
           <h3 class="text-sm font-semibold text-gray-100 leading-tight">
@@ -31,8 +26,6 @@ defineProps<CountryCardProps>();
           </h3>
           <p class="mt-0.5 text-xs text-gray-500">{{ country.region }}</p>
         </div>
-
-        <!-- Favourite button — wired up with Pinia later -->
         <button
           class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-dark-700 bg-dark-800 text-gray-500 transition hover:border-brand-500/50 hover:text-brand-500"
           aria-label="Add to favourites"
@@ -40,8 +33,6 @@ defineProps<CountryCardProps>();
           <Icon name="lucide:heart" class="h-4 w-4" />
         </button>
       </div>
-
-      <!-- Stats -->
       <div class="flex items-center justify-between border-t border-dark-800 pt-3">
         <div class="flex flex-col gap-0.5">
           <span class="text-xs text-gray-500">Population</span>
