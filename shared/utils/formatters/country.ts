@@ -19,20 +19,20 @@ export const formatGini = (gini?: Record<string, number>): string | null => {
   return year ? `${gini[year]} (${year})` : null;
 };
 
-export const formatNativeNames = (
-  nativeName?: Record<string, { official: string; common: string }>,
-): string | null => {
+export const formatNativeNames = (nativeName?: Record<string, { official: string; common: string }>): string | null => {
   if (!nativeName) return null;
 
-  return Object.values(nativeName).map(n => n.common).join(', ');
+  return Object.values(nativeName)
+    .map((n) => n.common)
+    .join(', ');
 };
 
-export const formatCurrencies = (
-  currencies?: Record<string, { name: string; symbol: string }>,
-): string | null => {
+export const formatCurrencies = (currencies?: Record<string, { name: string; symbol: string }>): string | null => {
   if (!currencies) return null;
 
-  return Object.values(currencies).map(c => `${c.name} (${c.symbol})`).join(', ');
+  return Object.values(currencies)
+    .map((c) => `${c.name} (${c.symbol})`)
+    .join(', ');
 };
 
 export const formatLanguages = (languages?: Record<string, string>): string | null => {
@@ -56,7 +56,7 @@ export const formatPopulation = (population?: number | null): string => {
   return population.toString();
 };
 
-export const formatArea = (area?: number ): string => {
+export const formatArea = (area?: number): string => {
   if (!area) return 'N/A';
 
   return `${new Intl.NumberFormat().format(area)} km²`;

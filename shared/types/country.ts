@@ -76,12 +76,10 @@ export type CountryUI = {
   code: string | null;
   name: string | null;
   flag: string | null;
-  population: number | null;
   populationFormatted: string | null;
   region: string | null;
   capital: string | null;
   altFlagText: string | null;
-  area: number | null
   areaFormatted: string | null
 };
 
