@@ -6,6 +6,7 @@
     "dev": "nuxt dev",
     "prepare": "nuxt prepare",
     "build": "npm run prepare && nuxt build",
+    "start": "node .output/server/index.mjs",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
