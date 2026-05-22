@@ -6,7 +6,7 @@ export default defineEventHandler(async () => {
 
   const data = await fetchFromExternalApi<CountryDTO[]>(() =>
     $fetch<CountryDTO[]>(
-      `${config.public.countriesApiBase}/all?fields=name,flags,population,region,cca2,capital`,
+      `${config.public.countriesApiBase}/all?fields=name,flags,population,region,cca2,capital,area`,
     ),
   );
 

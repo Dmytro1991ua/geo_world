@@ -10,7 +10,6 @@ export default withNuxt(
   {
     ignores: ['**/.nuxt/**', '**/.output/**', '**/node_modules/**', '**/dist/**'],
   },
-
   // 2. Main Workspace Plugin Map and Rule Definitions
   {
     plugins: {
@@ -73,7 +72,6 @@ export default withNuxt(
       '@stylistic/no-trailing-spaces': 'error',
     },
   },
-
   // 3. Layer Specific Absolute Import Overrides
   {
     files: ['server/**/*.ts', 'layers/**/server/**/*.ts'],

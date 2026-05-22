@@ -13,7 +13,7 @@ export const useGetWeatherData = (
       watch: false,
     },
     {
-      errorMessage: 'Failed to load weather',
+      errorMessage: 'Failed to load weather data',
     },
   );
 

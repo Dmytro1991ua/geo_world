@@ -46,3 +46,18 @@ export const formatLatLng = (latlng?: number[]): CountryLatLng | null => {
 
   return { lat: latlng[0], lon: latlng[1] };
 };
+
+export const formatPopulation = (population?: number | null): string => {
+  if (!population) return 'N/A';
+
+  if (population >= 1_000_000) return `${(population / 1_000_000).toFixed(1)}M`;
+  if (population >= 1_000) return `${(population / 1_000).toFixed(1)}K`;
+
+  return population.toString();
+};
+
+export const formatArea = (area?: number ): string => {
+  if (!area) return 'N/A';
+
+  return `${new Intl.NumberFormat().format(area)} km²`;
+};
