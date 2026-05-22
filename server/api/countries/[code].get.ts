@@ -3,7 +3,7 @@ import type { CountryDetailDTO } from '~~/shared/types/country';
 
 export default defineEventHandler(async (event) => {
   const code = getRouterParam(event, 'code');
-  const config = useRuntimeConfig();
+  const config = useRuntimeConfig(event);
   const baseUrl = config.public.countriesApiBase;
 
   const countries = await fetchFromExternalApi<CountryDetailDTO[]>(() =>

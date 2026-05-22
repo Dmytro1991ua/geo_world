@@ -7,11 +7,11 @@ export default defineNuxtConfig({
     enabled: true,
   },
   runtimeConfig: {
-    openweatherApiKeyBase: '',
+    openweatherApiKeyBase: process.env.NUXT_OPENWEATHER_API_KEY_BASE || '',
     public: {
-      openweatherApiUrlBase: '',
-      countriesApiBase: '',
-      openweatherApiIcon: '',
+      openweatherApiUrlBase: process.env.NUXT_PUBLIC_OPENWEATHER_API_URL_BASE || '',
+      countriesApiBase: process.env.NUXT_PUBLIC_COUNTRIES_API_BASE || '',
+      openweatherApiIcon: process.env.NUXT_PUBLIC_OPENWEATHER_API_ICON || '',
     },
   },
   routeRules: {

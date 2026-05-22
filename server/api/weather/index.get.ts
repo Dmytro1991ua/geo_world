@@ -2,7 +2,7 @@ import { mapWeatherDtoToUI } from '#shared/mappers/weather';
 import type { WeatherDTO } from '#shared/types/weather';
 
 export default defineEventHandler(async (event) => {
-  const config = useRuntimeConfig();
+  const config = useRuntimeConfig(event);
   const baseWeatherUrl = config.public.openweatherApiUrlBase;
   const apiKey = config.openweatherApiKeyBase;
 
