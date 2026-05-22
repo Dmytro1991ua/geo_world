@@ -1,14 +1,15 @@
 import type { CountryBorderUI, CountryDetailUI } from '#shared/types/country';
-import { formatCallingCode, formatCurrencies, formatGini, formatLanguages, formatLatLng, formatListToString, formatNativeNames } from '~~/shared/utils/formatters/country';
+import { formatArea, formatCallingCode, formatCurrencies, formatGini, formatLanguages, formatLatLng, formatListToString, formatNativeNames, formatPopulation } from '~~/shared/utils/formatters/country';
 
 export const mapCountryDtoToUI = (country: CountryDTO): CountryUI => ({
   code: country.cca2 ?? null,
   name: country.name?.common ?? null,
   flag: country.flags?.png ?? country.flags?.svg ?? null,
-  population: country.population ?? null,
+  populationFormatted: formatPopulation(country.population),
   region: country.region ?? null,
   capital: formatListToString(country.capital),
   altFlagText: country.flags?.alt ?? null,
+  areaFormatted: formatArea(country.area),
 });
 
 export const mapCountryBordersDtoToUI = (border: CountryDTO): CountryBorderUI => ({

@@ -32,7 +32,6 @@ const emit = defineEmits<AppEmptyStateEmits>();
       :name="icon"
       :class="cn('h-10 w-10 text-brand-500 mb-4', iconClassName)"
     />
-
     <h1
       :class="cn('text-xl font-semibold text-light-50', titleClassName)"
     >
