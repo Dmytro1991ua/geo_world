@@ -5,6 +5,15 @@ type CountryDetailsHero = {
 
 const props = defineProps<CountryDetailsHero>();
 
+const { onSharePage } = useWebShare();
+
+const onHandleSharePage = () =>
+  onSharePage({
+    title: props.country.name ?? '',
+    text: `Check out ${props.country.name}`,
+    url: globalThis.location.href,
+  });
+
 const actions = computed(() => [
   {
     label: 'Saved',
@@ -20,7 +29,7 @@ const actions = computed(() => [
     iconClass: 'text-gray-400',
     href: null,
     show: true,
-    onClick: () => {},
+    onClick: onHandleSharePage,
   },
   {
     label: 'Maps',
@@ -31,6 +40,7 @@ const actions = computed(() => [
     onClick: null,
   },
 ]);
+
 </script>
 
 <template>
