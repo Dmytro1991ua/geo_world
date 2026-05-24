@@ -2,6 +2,7 @@
 const { data: countries, error, status, refresh } = await useGetCountries();
 
 const isEmpty = computed(() => !countries.value?.length);
+
 </script>
 
 <template>
@@ -17,6 +18,8 @@ const isEmpty = computed(() => !countries.value?.length);
         v-for="country in countries"
         :key="country.code ?? ''"
         :country="country"
+        :target-url="`/countries/${country.code?.toLowerCase()}`"
       />
-    </div>  </AppDataState>
+    </div>
+  </AppDataState>
 </template>

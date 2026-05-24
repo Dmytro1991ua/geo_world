@@ -40,7 +40,7 @@ export type CountryDTO = {
   capital?: string[] | null;
   region?: string;
   population?: number;
-  area?: number
+  area?: number;
 };
 
 export type CountryDetailDTO = CountryDTO & {
@@ -76,11 +76,13 @@ export type CountryUI = {
   code: string | null;
   name: string | null;
   flag: string | null;
+  population: number | null;
   populationFormatted: string | null;
   region: string | null;
   capital: string | null;
   altFlagText: string | null;
-  areaFormatted: string | null
+  area: number | null;
+  areaFormatted: string | null;
 };
 
 export type CountryDetailUI = CountryUI & {
@@ -100,4 +102,5 @@ export type CountryDetailUI = CountryUI & {
   coatOfArms: string | null;
   gini: string | null;
   latlng?: CountryLatLng | null;
+  density: string | null;
 };
