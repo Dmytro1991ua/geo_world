@@ -1,10 +1,23 @@
 <script setup lang="ts">
 type CountryCardProps = {
   country: CountryUI;
-  targetUrl: string
+  targetUrl: string;
 };
 
-defineProps<CountryCardProps>();
+const props = defineProps<CountryCardProps>();
+
+const stats = computed(() => [
+  {
+    label: 'Population',
+    value: props.country.populationFormatted,
+    align: 'left',
+  },
+  {
+    label: 'Area',
+    value: props.country.areaFormatted,
+    align: 'right',
+  },
+]);
 </script>
 
 <template>
@@ -37,16 +50,17 @@ defineProps<CountryCardProps>();
         </button>
       </div>
       <div class="flex items-center justify-between border-t border-dark-800 pt-3">
-        <div class="flex flex-col gap-0.5">
-          <span class="text-xs text-gray-400">Population</span>
-          <span class="text-xs font-medium text-gray-300">
-            {{ country.populationFormatted }}
+        <div
+          v-for="stat in stats"
+          :key="stat.label"
+          class="flex flex-col gap-0.5"
+          :class="stat.align === 'right' ? 'text-right' : ''"
+        >
+          <span class="text-xs text-gray-400">
+            {{ stat.label }}
           </span>
-        </div>
-        <div class="flex flex-col gap-0.5 text-right">
-          <span class="text-xs text-gray-400">Area</span>
           <span class="text-xs font-medium text-gray-300">
-            {{ country.areaFormatted }}
+            {{ stat.value }}
           </span>
         </div>
       </div>

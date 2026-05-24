@@ -2,6 +2,7 @@
 type CountryDetailsHero = {
   country: CountryDetailUI;
 };
+
 const props = defineProps<CountryDetailsHero>();
 
 const actions = computed(() => [

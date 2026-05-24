@@ -1,10 +1,10 @@
 const DEFAULT_INTERVAL_IN_MILLISECONDS = 1000;
 
-type UseClock = {
+type useCurrentTime  = {
   currentTime: Ref<number>;
 };
 
-export const useCurrentTime = (intervalMs = DEFAULT_INTERVAL_IN_MILLISECONDS): UseClock => {
+export const useCurrentTime = (intervalMs = DEFAULT_INTERVAL_IN_MILLISECONDS): useCurrentTime  => {
   const currentTime = ref(Date.now());
 
   let timer: ReturnType<typeof setInterval>;
