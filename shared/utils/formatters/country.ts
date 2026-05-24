@@ -61,3 +61,11 @@ export const formatArea = (area?: number): string => {
 
   return `${new Intl.NumberFormat().format(area)} km²`;
 };
+
+export const calculatedDensity = (population?: number | null, area?: number): string => {
+  if (!population || !area) return 'N/A';
+
+  const density = population / area;
+
+  return `${density.toFixed(1)} / km²`;
+};
