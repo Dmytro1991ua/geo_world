@@ -22,7 +22,7 @@ const mapCondition = (weather: WeatherCurrentDTO['weather'][0] | undefined) => (
   iconUrl: weather ? buildWeatherIconUrl(weather.icon) : '',
 });
 
-const mapCurrentToUI = (current: WeatherCurrentDTO, offset: number): WeatherCurrentUI => ({
+const mapCurrentToUI = (current: WeatherCurrentDTO, timezone: string): WeatherCurrentUI => ({
   temperature: Math.round(current.temp),
   feelsLike: Math.round(current.feels_like),
   humidity: current.humidity,
@@ -34,16 +34,16 @@ const mapCurrentToUI = (current: WeatherCurrentDTO, offset: number): WeatherCurr
   visibility: current.visibility,
   uvIndex: current.uvi,
   dewPoint: Math.round(current.dew_point),
-  sunrise: formatUnixToTime(current.sunrise, offset),
-  sunset: formatUnixToTime(current.sunset, offset),
-  updatedAt: formatUnixToDateTime(current.dt, offset),
+  sunrise: formatUnixToTime(current.sunrise, timezone),
+  sunset: formatUnixToTime(current.sunset, timezone),
+  updatedAt: formatUnixToDateTime(current.dt, timezone),
   condition: mapCondition(current.weather[0]),
   rain: current.rain?.['1h'] ?? null,
   snow: current.snow?.['1h'] ?? null,
 });
 
-const mapHourlyToUI = (hourly: WeatherHourlyDTO, offset: number): WeatherHourlyUI => ({
-  time: formatUnixToTime(hourly.dt, offset),
+const mapHourlyToUI = (hourly: WeatherHourlyDTO, timezone: string): WeatherHourlyUI => ({
+  time: formatUnixToTime(hourly.dt, timezone),
   temperature: Math.round(hourly.temp),
   feelsLike: Math.round(hourly.feels_like),
   windSpeed: hourly.wind_speed,
@@ -51,8 +51,8 @@ const mapHourlyToUI = (hourly: WeatherHourlyDTO, offset: number): WeatherHourlyU
   condition: mapCondition(hourly.weather[0]),
 });
 
-const mapDailyToUI = (daily: WeatherDailyDTO, offset: number): WeatherDailyUI => ({
-  date: formatUnixToDate(daily.dt, offset),
+const mapDailyToUI = (daily: WeatherDailyDTO, timezone: string): WeatherDailyUI => ({
+  date: formatUnixToDate(daily.dt, timezone),
   summary: daily.summary,
   tempMin: Math.round(daily.temp.min),
   tempMax: Math.round(daily.temp.max),
@@ -67,22 +67,22 @@ const mapDailyToUI = (daily: WeatherDailyDTO, offset: number): WeatherDailyUI =>
   condition: mapCondition(daily.weather[0]),
 });
 
-const mapAlertToUI = (alert: WeatherAlertDTO, offset: number): WeatherAlertUI => ({
+const mapAlertToUI = (alert: WeatherAlertDTO, timezone: string): WeatherAlertUI => ({
   source: alert.sender_name,
   event: alert.event,
-  from: formatUnixToDateTime(alert.start, offset),
-  to: formatUnixToDateTime(alert.end, offset),
+  from: formatUnixToDateTime(alert.start, timezone),
+  to: formatUnixToDateTime(alert.end, timezone),
   description: alert.description,
 });
 
 export const mapWeatherDtoToUI = (weather: WeatherDTO): WeatherUI => {
-  const offset = weather.timezone_offset;
+  const timezone = weather.timezone;
 
   return {
     timezone: weather.timezone,
-    current: mapCurrentToUI(weather.current, offset),
-    hourly: weather.hourly.map(hour => mapHourlyToUI(hour, offset)),
-    daily: weather.daily.map(day => mapDailyToUI(day, offset)),
-    alerts: weather.alerts?.map(alert => mapAlertToUI(alert, offset)) ?? [],
+    current: mapCurrentToUI(weather.current, timezone),
+    hourly: weather.hourly.map(hour => mapHourlyToUI(hour, timezone)),
+    daily: weather.daily.map(day => mapDailyToUI(day, timezone)),
+    alerts: weather.alerts?.map(alert => mapAlertToUI(alert, timezone)) ?? [],
   };
 };
