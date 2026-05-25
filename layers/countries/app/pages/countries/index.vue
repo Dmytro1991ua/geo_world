@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { data: countries, error, status, refresh } = await useGetCountries();
+const { data: countries, error, status, refresh } = await useGetCountries();const { regions, activeRegion, filteredCountries } = useCountriesFilter(countries);
 
 const isEmpty = computed(() => !countries.value?.length);
 
@@ -13,11 +13,13 @@ const isEmpty = computed(() => !countries.value?.length);
     error-title="Failed to load countries"
     @retry="refresh"
   >
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+    <CountryRegionTabs :regions="regions" :active-region="activeRegion" @change="activeRegion = $event" />
+    <div :key="activeRegion" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
       <CountryCard
-        v-for="country in countries"
+        v-for="(country, index) in filteredCountries"
         :key="country.code ?? ''"
         :country="country"
+        :index="index"
         :target-url="`/countries/${country.code?.toLowerCase()}`"
       />
     </div>

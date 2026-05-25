@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { motionPresets, motionTokens, staggerDelay } from '#shared/ui/index';
+
 type CountryCardProps = {
   country: CountryUI;
   targetUrl: string;
+  index: number;
 };
 
 const props = defineProps<CountryCardProps>();
@@ -22,6 +25,17 @@ const stats = computed(() => [
 
 <template>
   <NuxtLink
+    v-motion
+    :initial="motionPresets.fadeSlide.initial"
+    :enter="{
+      ...motionPresets.fadeSlide.enter,
+      transition: {
+        ...motionPresets.fadeSlide.enter.transition,
+        delay: motionTokens.delay.page + staggerDelay(index, 0, 100),
+        duration: motionTokens.duration.base,
+        ease: motionTokens.easing.standard,
+      },
+    }"
     :to="targetUrl"
     class="group relative flex flex-col overflow-hidden rounded-2xl border border-dark-700 bg-dark-700 transition-all duration-300 hover:border-dark-800 hover:shadow-xl hover:shadow-black/20 cursor-pointer"
   >

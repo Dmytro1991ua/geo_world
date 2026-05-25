@@ -2,7 +2,14 @@ import Aura from '@primeuix/themes/aura';
 
 export default defineNuxtConfig({
   extends: ['./layers/countries', './layers/weather'],
-  modules: ['@nuxt/eslint', '@pinia/nuxt', '@nuxtjs/tailwindcss', '@primevue/nuxt-module', '@nuxt/icon'],
+  modules: [
+    '@nuxt/eslint',
+    '@pinia/nuxt',
+    '@nuxtjs/tailwindcss',
+    '@primevue/nuxt-module',
+    '@nuxt/icon',
+    '@vueuse/motion/nuxt',
+  ],
   devtools: {
     enabled: true,
   },

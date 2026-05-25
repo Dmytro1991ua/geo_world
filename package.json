@@ -21,6 +21,7 @@
     "@primeuix/themes": "^2.0.3",
     "@primevue/nuxt-module": "^4.5.5",
     "@vueuse/core": "^14.3.0",
+    "@vueuse/motion": "^3.0.3",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",

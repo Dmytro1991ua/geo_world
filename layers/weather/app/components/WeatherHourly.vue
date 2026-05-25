@@ -11,7 +11,7 @@ const title = computed(() => `${props.hourly.length}-hour forecast`);
     <h2 class="mb-4 pb-4 text-xs font-semibold uppercase tracking-widest text-gray-400 border-b border-dark-800">
       {{ title }}
     </h2>
-    <div class="flex gap-3 overflow-x-auto pb-2 weather-scrollbar">
+    <div class="flex gap-3 overflow-x-auto pb-2 scrollbar-thin-x">
       <div
         v-for="hour in hourly"
         :key="hour.time"
