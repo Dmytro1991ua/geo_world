@@ -35,3 +35,9 @@ export async function fetchFromExternalApi<T>(handler: () => Promise<T>): Promis
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
+
+/**
+ * Sorts two strings alphabetically using the user's locale.
+ */
+export const compareAlphabetically = (current: string, next: string): number =>
+  current.localeCompare(next, undefined, { sensitivity: 'base', numeric: true });

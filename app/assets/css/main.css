@@ -56,19 +56,19 @@
     font-family: 'Zen Dots', sans-serif !important;
   }
 
-  .weather-scrollbar::-webkit-scrollbar {
+  .scrollbar-thin-x::-webkit-scrollbar {
     height: 4px;
   }
 
-  .weather-scrollbar::-webkit-scrollbar-track {
+  .scrollbar-thin-x::-webkit-scrollbar-track {
     @apply bg-gray-950;
   }
 
-  .weather-scrollbar::-webkit-scrollbar-thumb {
+  .scrollbar-thin-x::-webkit-scrollbar-thumb {
     @apply rounded-full bg-gray-800;
   }
 
-  .weather-scrollbar::-webkit-scrollbar-thumb:hover {
+  .scrollbar-thin-x::-webkit-scrollbar-thumb:hover {
     @apply bg-gray-500;
   }
 }
