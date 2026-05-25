@@ -8,7 +8,7 @@ type FormatTimeToDisplay = {
 
 export const formatTime = (dateTime: Dayjs) => dateTime.format('HH:mm:ss');
 
-export const formatDate = (dateTime: Dayjs) => dateTime.format('dddd, D MMM YYYY');
+export const formatDate = (dateTime: Dayjs) => dateTime.format('dddd, D MMM YYYY, h:mm A');
 
 export const formatTimezone = (dateTime: Dayjs) => dateTime.format('z (zzz)');
 

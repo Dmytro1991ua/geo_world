@@ -36,6 +36,7 @@ const status = computed(() => {
 const error = computed(() => countryError.value || weatherError.value);
 const isEmpty = computed(() => !country.value);
 const hasBorders = computed(() => !!country.value?.borders?.length);
+const hasAlerts = computed(() => !!weather.value?.alerts.length);
 
 const onHandleRetry = async () => {
   await Promise.all([refreshCountry(), refreshWeather()]);
@@ -65,7 +66,7 @@ const onHandleRetry = async () => {
         class="shrink-0"
       />
       <div class="flex-1 overflow-y-auto">
-        <div class="grid grid-cols-1 md:grid-cols-6 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-2">
           <CountryDetailsHero
             v-motion
             :initial="motionPresets.fadeUp.initial"
@@ -150,6 +151,20 @@ const onHandleRetry = async () => {
             :status="weatherStatus"
             class="md:row-start-4 md:row-end-5 md:col-start-1 md:col-end-7"
           />
+          <WeatherAlerts
+            v-if="hasAlerts"
+            v-motion
+            :initial="motionPresets.fadeUp.initial"
+            :enter="{
+              ...motionPresets.fadeUp.enter,
+              transition: {
+                ...motionPresets.fadeUp.enter.transition,
+                delay: motionTokens.delay.page + staggerDelay(5, 0, motionTokens.stagger.lg),
+              },
+            }"
+            class="md:row-start-5 md:row-end-6 md:col-start-1 md:col-end-7"
+            :alerts="weather?.alerts ?? []"
+          />
           <CountryDetailsLanguages
             v-motion
             :initial="motionPresets.fadeUp.initial"
@@ -163,7 +178,7 @@ const onHandleRetry = async () => {
             :languages="country?.languages"
             :class="
               cn(
-                'md:row-start-5 md:row-end-6',
+                'md:row-start-6 md:row-end-7',
                 hasBorders ? 'md:col-start-1 md:col-end-4' : 'md:col-start-1 md:col-end-7',
               )
             "
@@ -179,8 +194,8 @@ const onHandleRetry = async () => {
                 delay: motionTokens.delay.page + staggerDelay(7, 0, motionTokens.stagger.lg),
               },
             }"
-            :borders="country!.borders ?? []"
-            class="md:row-start-5 md:col-start-4 md:col-end-7"
+            :borders="country?.borders ?? []"
+            class="md:row-start-6 md:col-start-4 md:col-end-7"
           />
         </div>
       </div>
