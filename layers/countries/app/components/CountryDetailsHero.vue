@@ -3,7 +3,13 @@ type CountryDetailsHero = {
   country: CountryDetailUI;
 };
 
+const favoritesStore = useFavoritesStore();
+
 const props = defineProps<CountryDetailsHero>();
+
+const isFavorite = computed(() =>
+  favoritesStore.isFavorite(props.country.code),
+);
 
 const { onSharePage } = useWebShare();
 
@@ -16,12 +22,16 @@ const onHandleSharePage = () =>
 
 const actions = computed(() => [
   {
-    label: 'Saved',
+    label: isFavorite.value
+      ? 'Saved'
+      : 'Add to favorites',
     icon: 'lucide:heart',
-    iconClass: 'text-red-500',
-    href: null,
+    iconClass: isFavorite.value
+      ? 'text-brand-500 [&_path]:fill-current'
+      : 'text-gray-500 [&_path]:fill-none',
+
     show: true,
-    onClick: () => {},
+    onClick: () => favoritesStore.toggleFavorite(props.country.code),
   },
   {
     label: 'Share',

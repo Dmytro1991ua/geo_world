@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/eslint',
     '@pinia/nuxt',
+    'pinia-plugin-persistedstate/nuxt',
     '@nuxtjs/tailwindcss',
     '@primevue/nuxt-module',
     '@nuxt/icon',
@@ -94,6 +95,7 @@ export default defineNuxtConfig({
   icon: {
     // Force server-side local rendering (removes client fetching lag)
     serverBundle: 'local',
+    mode: 'svg',
     fallbackToApi: false,
     clientBundle: {
       scan: {

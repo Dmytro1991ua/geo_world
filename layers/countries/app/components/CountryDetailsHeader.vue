@@ -4,16 +4,19 @@ type CountryDetailsHeaderProps = {
 };
 
 defineProps<CountryDetailsHeaderProps>();
+
+const router = useRouter();
 </script>
 
 <template>
   <header class="bg-dark-700 mb-8 p-2 flex items-center gap-4">
-    <NuxtLink
-      to="/countries"
-      class="flex items-start gap-2 px-4 py-2 bg-dark-800 border rounded-xl hover:bg-dark-900 transition text-sm font-medium border-x-1 border-white"
+    <button
+      class="flex items-start gap-2 rounded-xl border border-white bg-dark-800 px-4 py-2 text-sm font-medium transition hover:bg-dark-900"
+      @click="router.back()"
     >
-      <span class="text-lg leading-none">&lsaquo;</span>Back
-    </NuxtLink>
+      <span class="text-lg leading-none">&lsaquo;</span>
+      Back
+    </button>
     <div class="w-px h-4 bg-white" />
     <h1 class="text-lg font-medium text-white">{{ countryName }}</h1>
   </header>

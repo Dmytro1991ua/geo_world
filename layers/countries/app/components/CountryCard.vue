@@ -5,9 +5,14 @@ type CountryCardProps = {
   country: CountryUI;
   targetUrl: string;
   index: number;
+  isFavorite: boolean;
+};
+type CountryCardEmits = {
+  toggleFavorite: [code: string | null];
 };
 
 const props = defineProps<CountryCardProps>();
+const emit = defineEmits<CountryCardEmits>();
 
 const stats = computed(() => [
   {
@@ -56,11 +61,14 @@ const stats = computed(() => [
           <p class="mt-0.5 text-xs text-gray-400">{{ country.region }}</p>
         </div>
         <button
-          class="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg border border-dark-700 bg-dark-800 text-gray-500 transition hover:border-brand-500/50 hover:text-brand-500"
-          aria-label="Add to favourites"
-          @click.stop
+          class="flex h-8 w-8 items-center justify-center rounded-lg border border-dark-700 bg-dark-800 text-gray-500 transition hover:text-brand-500"
+          @click.prevent="emit('toggleFavorite', country.code)"
         >
-          <Icon name="lucide:heart" class="h-4 w-4" />
+          <Icon
+            name="lucide:heart"
+            class="h-4 w-4 transition"
+            :class="isFavorite ? 'text-brand-500 [&_path]:fill-current' : 'text-gray-500 [&_path]:fill-none'"
+          />
         </button>
       </div>
       <div class="flex items-center justify-between border-t border-dark-800 pt-3">
