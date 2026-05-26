@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { motionPresets, motionTokens, staggerDelay } from '#shared/ui/index';
+import { enterWithDelay, fadeUp, getStaggerDelay } from '#shared/ui/index';
 
 const route = useRoute();
 
@@ -54,14 +54,8 @@ const onHandleRetry = async () => {
     <div class="h-screen flex flex-col">
       <CountryDetailsHeader
         v-motion
-        :initial="motionPresets.fadeUp.initial"
-        :enter="{
-          ...motionPresets.fadeUp.enter,
-          transition: {
-            ...motionPresets.fadeUp.enter.transition,
-            delay: motionTokens.delay.page,
-          },
-        }"
+        :initial="fadeUp.initial"
+        :enter="enterWithDelay(getStaggerDelay(0))"
         :country-name="country?.name"
         class="shrink-0"
       />
@@ -69,133 +63,74 @@ const onHandleRetry = async () => {
         <div class="grid grid-cols-1 md:grid-cols-6 gap-2">
           <CountryDetailsHero
             v-motion
-            :initial="motionPresets.fadeUp.initial"
-            :enter="{
-              ...motionPresets.fadeUp.enter,
-              transition: {
-                ...motionPresets.fadeUp.enter.transition,
-                delay: motionTokens.delay.page + staggerDelay(0, 0, motionTokens.stagger.lg),
-              },
-            }"
+            :initial="fadeUp.initial"
+            :enter="enterWithDelay(getStaggerDelay(1))"
             :country="country"
-            class="md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-4"
+            class="md:col-span-3"
           />
           <CountryDetailsFacts
             v-motion
-            :initial="motionPresets.fadeUp.initial"
-            :enter="{
-              ...motionPresets.fadeUp.enter,
-              transition: {
-                ...motionPresets.fadeUp.enter.transition,
-                delay: motionTokens.delay.page + staggerDelay(1, 0, motionTokens.stagger.lg),
-              },
-            }"
+            :initial="fadeUp.initial"
+            :enter="enterWithDelay(getStaggerDelay(2))"
             :country="country"
-            class="md:row-start-1 md:row-end-2 md:col-start-4 md:col-end-7"
+            class="md:col-span-3"
           />
           <WeatherCurrent
             v-motion
-            :initial="motionPresets.fadeUp.initial"
-            :enter="{
-              ...motionPresets.fadeUp.enter,
-              transition: {
-                ...motionPresets.fadeUp.enter.transition,
-                delay: motionTokens.delay.page + staggerDelay(2, 0, motionTokens.stagger.lg),
-              },
-            }"
+            :initial="fadeUp.initial"
+            :enter="enterWithDelay(getStaggerDelay(3))"
             :weather="weather?.current ?? null"
             :capital="country!.capital"
             :status="weatherStatus"
-            class="md:row-start-2 md:row-end-3 md:col-start-1 md:col-end-4"
+            class="md:col-span-3"
           />
           <WeatherLocalTime
             v-motion
-            :initial="motionPresets.fadeUp.initial"
-            :enter="{
-              ...motionPresets.fadeUp.enter,
-              transition: {
-                ...motionPresets.fadeUp.enter.transition,
-                delay: motionTokens.delay.page + staggerDelay(3, 0, motionTokens.stagger.lg),
-              },
-            }"
+            :initial="fadeUp.initial"
+            :enter="enterWithDelay(getStaggerDelay(4))"
             :weather="weather?.current ?? null"
             :country-timezone="weather?.timezone ?? null"
             :status="weatherStatus"
-            class="md:row-start-2 md:row-end-3 md:col-start-4 md:col-end-7"
+            class="md:col-span-3"
           />
           <WeatherHourly
             v-motion
-            :initial="motionPresets.fadeUp.initial"
-            :enter="{
-              ...motionPresets.fadeUp.enter,
-              transition: {
-                ...motionPresets.fadeUp.enter.transition,
-                delay: motionTokens.delay.page + staggerDelay(4, 0, motionTokens.stagger.lg),
-              },
-            }"
+            :initial="fadeUp.initial"
+            :enter="enterWithDelay(getStaggerDelay(5))"
             :hourly="weather?.hourly ?? []"
             :status="weatherStatus"
-            class="md:row-start-3 md:row-end-4 md:col-start-1 md:col-end-7"
+            class="md:col-span-6"
           />
           <WeatherDaily
             v-motion
-            :initial="motionPresets.fadeUp.initial"
-            :enter="{
-              ...motionPresets.fadeUp.enter,
-              transition: {
-                ...motionPresets.fadeUp.enter.transition,
-                delay: motionTokens.delay.page + staggerDelay(5, 0, motionTokens.stagger.lg),
-              },
-            }"
+            :initial="fadeUp.initial"
+            :enter="enterWithDelay(getStaggerDelay(6))"
             :daily="weather?.daily ?? []"
             :status="weatherStatus"
-            class="md:row-start-4 md:row-end-5 md:col-start-1 md:col-end-7"
+            class="md:col-span-6"
           />
           <WeatherAlerts
             v-if="hasAlerts"
             v-motion
-            :initial="motionPresets.fadeUp.initial"
-            :enter="{
-              ...motionPresets.fadeUp.enter,
-              transition: {
-                ...motionPresets.fadeUp.enter.transition,
-                delay: motionTokens.delay.page + staggerDelay(5, 0, motionTokens.stagger.lg),
-              },
-            }"
-            class="md:row-start-5 md:row-end-6 md:col-start-1 md:col-end-7"
+            :initial="fadeUp.initial"
+            :enter="enterWithDelay(getStaggerDelay(6))"
             :alerts="weather?.alerts ?? []"
+            class="md:col-span-6"
           />
           <CountryDetailsLanguages
             v-motion
-            :initial="motionPresets.fadeUp.initial"
-            :enter="{
-              ...motionPresets.fadeUp.enter,
-              transition: {
-                ...motionPresets.fadeUp.enter.transition,
-                delay: motionTokens.delay.page + staggerDelay(6, 0, motionTokens.stagger.lg),
-              },
-            }"
+            :initial="fadeUp.initial"
+            :enter="enterWithDelay(getStaggerDelay(7))"
             :languages="country?.languages"
-            :class="
-              cn(
-                'md:row-start-6 md:row-end-7',
-                hasBorders ? 'md:col-start-1 md:col-end-4' : 'md:col-start-1 md:col-end-7',
-              )
-            "
+            :class="hasBorders ? 'md:col-span-3' : 'md:col-span-6'"
           />
           <CountryDetailBorders
             v-if="hasBorders"
             v-motion
-            :initial="motionPresets.fadeUp.initial"
-            :enter="{
-              ...motionPresets.fadeUp.enter,
-              transition: {
-                ...motionPresets.fadeUp.enter.transition,
-                delay: motionTokens.delay.page + staggerDelay(7, 0, motionTokens.stagger.lg),
-              },
-            }"
+            :initial="fadeUp.initial"
+            :enter="enterWithDelay(getStaggerDelay(8))"
             :borders="country?.borders ?? []"
-            class="md:row-start-6 md:col-start-4 md:col-end-7"
+            class="md:col-span-3"
           />
         </div>
       </div>

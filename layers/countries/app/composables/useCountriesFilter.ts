@@ -1,11 +1,19 @@
+import { refDebounced } from '@vueuse/core';
+
 export type UseCountryFilters = {
-  regions: ComputedRef<string[]>
-  activeRegion: Ref<string>
-  filteredCountries: ComputedRef<CountryUI[]>
+  regions: ComputedRef<string[]>;
+  activeRegion: Ref<string>;
+  searchQuery: Ref<string>;
+  filteredCountries: ComputedRef<CountryUI[]>;
 };
 
-export const useCountriesFilter = (countries: Ref<CountryUI[] | null>) => {
-  const activeRegion = ref('All');
+export const DEFAULT_DEBOUNCE_MS = 150;
+
+export const useCountriesFilter = (countries: Ref<CountryUI[] | null>): UseCountryFilters => {
+  const activeRegion = ref<string>('All');
+  const searchQuery = ref<string>('');
+
+  const debouncedQuery = refDebounced(searchQuery, DEFAULT_DEBOUNCE_MS);
 
   const regions = computed(() => {
     if (!countries.value) return ['All'];
@@ -20,10 +28,22 @@ export const useCountriesFilter = (countries: Ref<CountryUI[] | null>) => {
 
   const filteredCountries = computed(() => {
     if (!countries.value) return [];
-    if (activeRegion.value === 'All') return countries.value;
 
-    return countries.value.filter((c) => c.region === activeRegion.value);
+    const query = debouncedQuery.value.toLowerCase().trim();
+    const isAllRegions = activeRegion.value === 'All';
+
+    return countries.value.filter((country) => {
+      const matchesRegion = isAllRegions || country.region === activeRegion.value;
+
+      if (!matchesRegion) return false;
+      if (!query) return true;
+
+      const name = country.name?.toLowerCase() ?? '';
+      const capital = country.capital?.toLowerCase() ?? '';
+
+      return name.includes(query) || capital.includes(query);
+    });
   });
 
-  return { regions, activeRegion, filteredCountries };
+  return { regions, searchQuery, activeRegion, filteredCountries };
 };

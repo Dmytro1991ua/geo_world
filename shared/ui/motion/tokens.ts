@@ -4,17 +4,14 @@ export const motionTokens = {
     base: 500,
     slow: 700,
   },
-
   easing: {
     standard: 'easeOut',
   },
-
   stagger: {
     sm: 60,
     md: 100,
     lg: 140,
   },
-
   delay: {
     none: 0,
     page: 400,

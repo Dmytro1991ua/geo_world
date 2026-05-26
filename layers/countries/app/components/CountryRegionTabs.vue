@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { motionPresets, motionTokens, staggerDelay } from '#shared/ui/index';
-
 type CountryRegionTabsProps = {
   regions: string[];
   activeRegion: string;
@@ -16,19 +14,8 @@ defineEmits<CountryRegionTabsEmit>();
 <template>
   <div class="mb-6 flex gap-2 overflow-x-auto pb-3 scrollbar-thin-x">
     <button
-      v-for="(region, index) in regions"
+      v-for="region in regions"
       :key="region"
-      v-motion
-      :initial="motionPresets.fadeSlide.initial"
-      :enter="{
-        ...motionPresets.fadeSlide.enter,
-        transition: {
-          ...motionPresets.fadeSlide.enter.transition,
-          delay: motionTokens.delay.page + staggerDelay(index, 0, 100),
-          duration: motionTokens.duration.base,
-          ease: motionTokens.easing.standard,
-        },
-      }"
       :class="
         cn(
           'whitespace-nowrap rounded-xl border px-4 py-2 text-sm font-medium transition-all duration-200',
