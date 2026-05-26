@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { motionPresets } from '#shared/ui/index';
+
 const { data: countries } = await useGetCountries();
 
 const favoritesStore = useFavoritesStore();
@@ -23,6 +25,7 @@ const FAVORITES_EMPTY_STATE = {
     <CountryCard
       v-for="(country, index) in favoriteCountries"
       :key="country.code ?? ''"
+      v-motion="motionPresets.staggerItem"
       :country="country"
       :index="index"
       :target-url="`/countries/${country.code?.toLowerCase()}`"

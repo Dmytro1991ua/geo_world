@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { motionPresets, motionTokens, staggerDelay } from '#shared/ui/index';
 
 type CountryCardProps = {
   country: CountryUI;
@@ -30,18 +29,8 @@ const stats = computed(() => [
 
 <template>
   <NuxtLink
-    v-motion
-    :initial="motionPresets.fadeSlide.initial"
-    :enter="{
-      ...motionPresets.fadeSlide.enter,
-      transition: {
-        ...motionPresets.fadeSlide.enter.transition,
-        delay: motionTokens.delay.page + staggerDelay(index, 0, 100),
-        duration: motionTokens.duration.base,
-        ease: motionTokens.easing.standard,
-      },
-    }"
     :to="targetUrl"
+    :prefetch="false"
     class="group relative flex flex-col overflow-hidden rounded-2xl border border-dark-700 bg-dark-700 transition-all duration-300 hover:border-dark-800 hover:shadow-xl hover:shadow-black/20 cursor-pointer"
   >
     <div class="relative w-full overflow-hidden rounded-t-2xl bg-dark-700" style="aspect-ratio: 16/9">
