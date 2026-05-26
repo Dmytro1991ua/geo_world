@@ -54,8 +54,6 @@ export const motionPresets = {
       },
     },
   },
-
-  // ✅ NEW: card variant (reuses fadeUp internally)
   staggerItem: {
     initial: {
       opacity: 0,
