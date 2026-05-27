@@ -2,7 +2,7 @@
 import { APP_NAVIGATION_ITEMS_CONFIG } from './config';
 
 type AppHeaderNavMobileProps = {
-  isOpen: boolean
+  isOpen: boolean;
 };
 
 defineProps<AppHeaderNavMobileProps>();
@@ -17,13 +17,11 @@ defineProps<AppHeaderNavMobileProps>();
     leave-from-class="translate-y-0 opacity-100"
     leave-to-class="-translate-y-2 opacity-0"
   >
-    <nav v-if="isOpen" class="flex flex-col gap-1 border-t border-dark-800 bg-dark-900 px-4 py-3 md:hidden">
-      <AppHeaderNavLink
-        v-for="item in APP_NAVIGATION_ITEMS_CONFIG"
-        :key="item.id"
-        :item="item"
-        variant="mobile"
-      />
+    <nav
+      v-if="isOpen"
+      class="flex flex-col gap-1 border-t border-gray-200 dark:border-dark-800 bg-white dark:bg-dark-900 px-4 py-3 md:hidden"
+    >
+      <AppHeaderNavLink v-for="item in APP_NAVIGATION_ITEMS_CONFIG" :key="item.id" :item="item" variant="mobile" />
     </nav>
   </Transition>
 </template>

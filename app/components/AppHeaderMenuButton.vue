@@ -16,7 +16,8 @@ const emit = defineEmits<AppHeaderMenuButtonEmits>();
   <button
     :class="
       cn(
-        'flex h-9 w-9 flex-col items-center justify-center gap-1.5 rounded-lg border border-dark-700 bg-dark-800 md:hidden',
+        'flex h-9 w-9 flex-col items-center justify-center gap-1.5 rounded-lg border md:hidden',
+        'border-light-300 bg-white dark:border-dark-700 dark:bg-dark-800',
         wrapperClassName,
       )
     "
@@ -24,12 +25,15 @@ const emit = defineEmits<AppHeaderMenuButtonEmits>();
     @click="emit('toggle')"
   >
     <span
-      class="block h-0.5 w-5 rounded bg-gray-300 transition-all duration-300"
+      class="block h-0.5 w-5 rounded bg-gray-600 dark:bg-gray-300 transition-all duration-300"
       :class="isOpen ? 'translate-y-2 rotate-45' : ''"
     />
-    <span class="block h-0.5 w-5 rounded bg-gray-300 transition-all duration-300" :class="isOpen ? 'opacity-0' : ''" />
     <span
-      class="block h-0.5 w-5 rounded bg-gray-300 transition-all duration-300"
+      class="block h-0.5 w-5 rounded bg-gray-600 dark:bg-gray-300 transition-all duration-300"
+      :class="isOpen ? 'opacity-0' : ''"
+    />
+    <span
+      class="block h-0.5 w-5 rounded bg-gray-600 dark:bg-gray-300 transition-all duration-300"
       :class="isOpen ? '-translate-y-2 -rotate-45' : ''"
     />
   </button>

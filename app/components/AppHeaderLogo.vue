@@ -25,6 +25,6 @@ defineProps<AppHeaderLogoProps>();
         background-position-y: center;
       "
     />
-    <span :class="cn('font-header text-l font-semibold tracking-tight', textClassName)"> GeoWorld </span>
+    <span :class="cn('font-header text-lg font-semibold tracking-tight text-gray-900 dark:text-gray-100', textClassName)"> GeoWorld </span>
   </NuxtLink>
 </template>

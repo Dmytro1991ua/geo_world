@@ -10,7 +10,7 @@ type AppHeaverNavLinkProps = {
 const props = defineProps<AppHeaverNavLinkProps>();
 
 const baseStyles =
-  'flex items-center text-sm text-gray-400 transition hover:bg-dark-800 hover:text-white rounded-lg px-4';
+  'flex items-center text-sm text-gray-600 dark:text-gray-300 transition hover:bg-gray-100 dark:hover:bg-dark-800 hover:text-gray-900 dark:hover:text-white rounded-lg px-4';
 
 const linkClass = computed(() => [
   baseStyles,
@@ -19,7 +19,7 @@ const linkClass = computed(() => [
 </script>
 
 <template>
-  <NuxtLink :to="item.to" :class="linkClass" active-class="bg-dark-800 text-white">
+  <NuxtLink :to="item.to" :class="linkClass" active-class="bg-gray-200 dark:bg-dark-800 text-gray-900 dark:text-white">
     <Icon :name="item.icon" class="h-4 w-4 shrink-0" />
     <span class="font-header text-xs tracking-wider uppercase">{{ item.label }}</span>
   </NuxtLink>
