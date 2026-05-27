@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 type CountrySearchProps = {
   modelValue: string;
 };
@@ -12,9 +11,7 @@ defineEmits<CountrySearchEmits>();
 </script>
 
 <template>
-  <div
-    class="relative w-full"
-  >
+  <div class="relative w-full">
     <Icon
       name="lucide:search"
       class="absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-500 pointer-events-none"
@@ -22,7 +19,10 @@ defineEmits<CountrySearchEmits>();
     <InputText
       :value="modelValue"
       placeholder="Search by country or capital..."
-      class="w-full pl-9 pr-9"
+      class="w-full"
+      :pt="{
+        root: { style: 'padding-left: 2.25rem; padding-right: 2.25rem;' },
+      }"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
     <button
