@@ -1,3 +1,5 @@
+import { useWindowScroll } from '@vueuse/core';
+
 const SCROLL_THRESHOLD = 20;
 
 type UseScrollPosition = {
@@ -5,22 +7,9 @@ type UseScrollPosition = {
 };
 
 export const useScrollPosition = (): UseScrollPosition => {
-  const isHeaderScrolled = ref<boolean>(false);
+  const { y } = useWindowScroll();
 
-  const updatePosition = () => {
-    if (typeof window === 'undefined') return;
-    isHeaderScrolled.value = window.scrollY > SCROLL_THRESHOLD;
-  };
-
-  onMounted(() => {
-    window.addEventListener('scroll', updatePosition, { passive: true });
-
-    updatePosition();
-  });
-
-  onUnmounted(() => {
-    window.removeEventListener('scroll', updatePosition);
-  });
+  const isHeaderScrolled = computed(() => y.value > SCROLL_THRESHOLD);
 
   return { isHeaderScrolled };
 };
