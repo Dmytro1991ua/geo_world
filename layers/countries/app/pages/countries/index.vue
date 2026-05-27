@@ -52,8 +52,8 @@ const isEmpty = computed(() => !countries.value?.length);
         @toggle-favorite="favoritesStore.toggleFavorite"
       />
     </div>
-    <Button v-if="hasMoreCountries" type="button" class="btn-style mx-auto mt-6 block" @click="loadMore">
-      Load more
-    </Button>
+    <div v-if="hasMoreCountries" class="mt-4 flex justify-center">
+      <Button type="button" class="btn-style" @click="loadMore"> Load more </Button>
+    </div>
   </AppDataState>
 </template>
