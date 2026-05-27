@@ -10,6 +10,29 @@ Most country apps stop at flags, capitals, and population. Geo World goes a litt
 
 You can browse countries, filter by region, search by country or capital, save favorites, open a detailed country profile, and see current weather, hourly forecasts, daily forecasts, alerts, local time, languages, borders, maps, currencies, area, population, and density in one place.
 
+## Screenshots
+
+### `Countries` page
+<img
+  src="https://github.com/user-attachments/assets/6e0b7bab-3f2a-43b7-9db1-6a6728d0cd96"
+  alt="GeoWorld countries page"
+  width="100%"
+/>
+
+### `Country Details` page
+
+<img width="1920" height="2314" alt="screencapture-localhost-3000-countries-mx-2026-05-27-14_32_33" src="https://github.com/user-attachments/assets/fa096ac4-8ea9-4be0-b20d-d962a327198a" />
+
+### `Favorites` page
+
+<img width="1920" height="1143" alt="screencapture-geoworld-production-up-railway-app-countries-2026-05-27-14_15_52" src="https://github.com/user-attachments/assets/5723a72a-4117-4c60-9962-1979ae33b57f" />
+
+### `Theme` comparison
+
+<img src="https://github.com/user-attachments/assets/662ea1d7-c1b1-4332-9b72-d97446a37447" alt="GeoWorld country details page" width="100%" />
+
+<img width="1920" height="2323" alt="screencapture-localhost-3000-countries-gt-2026-05-27-14_28_18" src="https://github.com/user-attachments/assets/c161dd9c-d49e-4366-a5ab-70ab5b3473e8" />
+
 ## Quick Start
 
 Create a `.env` file in the project root:
