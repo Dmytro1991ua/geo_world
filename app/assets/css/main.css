@@ -61,11 +61,11 @@
   }
 
   .scrollbar-thin-x::-webkit-scrollbar-track {
-    @apply bg-gray-100 dark:bg-dark-800;
+    @apply bg-gray-100 dark:bg-dark-950;
   }
 
   .scrollbar-thin-x::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-gray-300 dark:bg-dark-700;
+    @apply rounded-full bg-gray-300 dark:bg-dark-800;
   }
 
   .scrollbar-thin-x::-webkit-scrollbar-thumb:hover {
