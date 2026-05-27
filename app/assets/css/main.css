@@ -24,7 +24,7 @@
   }
 
   body {
-    @apply bg-gray-950 text-gray-100 antialiased;
+    @apply bg-gray-100 text-gray-100 antialiased;
     line-height: 1.5;
   }
 
@@ -33,15 +33,15 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-gray-900;
+    @apply bg-gray-100 dark:bg-dark-800;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-gray-700;
+    @apply rounded-full bg-gray-300 dark:bg-dark-700;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-500;
+    @apply bg-gray-400 dark:bg-dark-700;
   }
 }
 
@@ -61,14 +61,18 @@
   }
 
   .scrollbar-thin-x::-webkit-scrollbar-track {
-    @apply bg-gray-950;
+    @apply bg-gray-100 dark:bg-dark-800;
   }
 
   .scrollbar-thin-x::-webkit-scrollbar-thumb {
-    @apply rounded-full bg-gray-800;
+    @apply rounded-full bg-gray-300 dark:bg-dark-700;
   }
 
   .scrollbar-thin-x::-webkit-scrollbar-thumb:hover {
-    @apply bg-gray-500;
+    @apply bg-gray-400 dark:bg-dark-700;
+  }
+
+  .card-hero-action-btn {
+    @apply flex items-center gap-2 rounded-xl border border-gray-300 dark:border-dark-700 bg-gray-200 dark:bg-dark-800 px-5 py-2.5 text-sm font-medium text-gray-600 dark:text-gray-300 transition hover:border-gray-300 dark:hover:border-dark-700 hover:text-gray-900 dark:hover:text-white;
   }
 }

@@ -2,6 +2,7 @@
 type CountrySearchProps = {
   modelValue: string;
 };
+
 type CountrySearchEmits = {
   'update:modelValue': [value: string];
 };
@@ -14,8 +15,9 @@ defineEmits<CountrySearchEmits>();
   <div class="relative w-full">
     <Icon
       name="lucide:search"
-      class="absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-500 pointer-events-none"
+      class="absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-gray-500 dark:text-gray-400 pointer-events-none"
     />
+
     <InputText
       :value="modelValue"
       placeholder="Search by country or capital..."
@@ -25,9 +27,10 @@ defineEmits<CountrySearchEmits>();
       }"
       @input="$emit('update:modelValue', ($event.target as HTMLInputElement).value)"
     />
+
     <button
       v-if="modelValue"
-      class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 transition hover:text-gray-300"
+      class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 dark:text-gray-400 transition hover:text-gray-900 dark:hover:text-white"
       @click="$emit('update:modelValue', '')"
     >
       <Icon name="lucide:x" class="h-4 w-4" />

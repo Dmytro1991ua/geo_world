@@ -7,9 +7,7 @@ const favoritesStore = useFavoritesStore();
 
 const props = defineProps<CountryDetailsHero>();
 
-const isFavorite = computed(() =>
-  favoritesStore.isFavorite(props.country.code),
-);
+const isFavorite = computed(() => favoritesStore.isFavorite(props.country.code));
 
 const { onSharePage } = useWebShare();
 
@@ -22,13 +20,9 @@ const onHandleSharePage = () =>
 
 const actions = computed(() => [
   {
-    label: isFavorite.value
-      ? 'Saved'
-      : 'Add to favorites',
+    label: isFavorite.value ? 'Saved' : 'Add to favorites',
     icon: 'lucide:heart',
-    iconClass: isFavorite.value
-      ? 'text-brand-500 [&_path]:fill-current'
-      : 'text-gray-500 [&_path]:fill-none',
+    iconClass: isFavorite.value ? 'text-brand-500 [&_path]:fill-current' : 'text-gray-500 [&_path]:fill-none',
 
     show: true,
     onClick: () => favoritesStore.toggleFavorite(props.country.code),
@@ -50,24 +44,25 @@ const actions = computed(() => [
     onClick: null,
   },
 ]);
-
 </script>
 
 <template>
-  <div class="flex flex-col gap-6 rounded-2xl border border-dark-800 bg-dark-700 p-6">
-    <div class="overflow-hidden rounded-2xl bg-dark-800">
+  <div
+    class="flex flex-col gap-6 rounded-2xl border border-gray-400 dark:border-dark-700 bg-white dark:bg-dark-700 p-6"
+  >
+    <div class="overflow-hidden rounded-2xl bg-gray-200 dark:bg-dark-800">
       <div class="flex flex-col items-center justify-center gap-3 py-8 px-6 h-64">
         <img
           :src="country.flag ?? ''"
           :alt="country.altFlagText ?? `Flag of ${country.name}`"
           class="w-full h-full object-contain drop-shadow-xl transition-transform duration-500 hover:scale-105"
         >
-        <span class="text-xs text-gray-400">National Flag</span>
+        <span class="text-xs text-gray-500 dark:text-gray-400">National Flag</span>
       </div>
     </div>
     <div
       v-if="country.coatOfArms"
-      class="flex items-center gap-4 rounded-2xl border border-dark-800 bg-dark-800 px-5 py-4"
+      class="flex items-center gap-4 rounded-2xl border border-gray-300 dark:border-dark-700 bg-gray-200 dark:bg-dark-800 px-5 py-4"
     >
       <img
         :src="country.coatOfArms"
@@ -75,16 +70,16 @@ const actions = computed(() => [
         class="h-auto w-24 flex-shrink-0 object-contain transition-transform duration-500 hover:scale-105"
       >
       <div>
-        <p class="text-sm font-medium text-gray-200">Coat of Arms</p>
-        <p class="text-xs text-gray-400">Official national symbol</p>
+        <p class="text-sm font-medium text-gray-900 dark:text-gray-100">Coat of Arms</p>
+        <p class="text-xs text-gray-500 dark:text-gray-400">Official national symbol</p>
       </div>
     </div>
     <div class="text-center sm:text-left">
-      <h1 class="text-xl font-bold text-gray-100">{{ country.name }}</h1>
-      <p v-if="country.officialName" class="mt-1 text-sm text-gray-400">
+      <h1 class="text-xl font-bold text-gray-900 dark:text-gray-100">{{ country.name }}</h1>
+      <p v-if="country.officialName" class="mt-1 text-sm text-gray-500 dark:text-gray-400">
         {{ country.officialName }}
       </p>
-      <p v-if="country.nativeNames" class="text-sm text-gray-500">
+      <p v-if="country.nativeNames" class="text-sm text-gray-400 dark:text-gray-500">
         {{ country.nativeNames }}
       </p>
     </div>
@@ -95,16 +90,12 @@ const actions = computed(() => [
           :href="action.href"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex items-center gap-2 rounded-xl border border-dark-900 bg-dark-800 px-5 py-2.5 text-sm font-medium text-gray-400 transition hover:border-gray-600 hover:text-white"
+          class="card-hero-action-btn"
         >
           <Icon :name="action.icon" :class="cn('h-4 w-4', action.iconClass)" />
           <span>{{ action.label }}</span>
         </a>
-        <button
-          v-else-if="action.show"
-          class="flex items-center gap-2 rounded-xl border border-dark-900 bg-dark-800 px-5 py-2.5 text-sm font-medium text-gray-400 transition hover:border-gray-600 hover:text-white"
-          @click="action.onClick?.()"
-        >
+        <button v-else-if="action.show" class="card-hero-action-btn" @click="action.onClick?.()">
           <Icon :name="action.icon" :class="cn('h-4 w-4', action.iconClass)" />
           <span>{{ action.label }}</span>
         </button>
