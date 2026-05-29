@@ -53,7 +53,13 @@ const isEmpty = computed(() => !countries.value?.length);
       />
     </div>
     <div v-if="hasMoreCountries" class="mt-4 flex justify-center">
-      <Button type="button" class="btn-style" @click="loadMore"> Load more </Button>
+      <button
+        type="button"
+        class='btn-style'
+        @click="loadMore"
+      >
+        Load more
+      </button>
     </div>
   </AppDataState>
 </template>
